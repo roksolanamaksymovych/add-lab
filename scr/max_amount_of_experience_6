@@ -1,0 +1,31 @@
+def find_max_experience(levels, experience):
+    max_experience = [0]
+
+    def dfs(level, position, current_experience):
+        current_experience += experience[level][position]
+        if level == levels - 1:
+            max_experience[0] = max(max_experience[0], current_experience)
+            return
+        dfs(level + 1, position, current_experience)
+        dfs(level + 1, position + 1, current_experience)
+
+    dfs(0, 0, 0)
+    return max_experience[0]
+
+
+def main():
+    with open("career.in", "r") as file_in:
+        levels = int(file_in.readline().strip())
+        experience = []
+        for line in file_in:
+            row = list(map(int, line.split()))
+            experience.append(row)
+
+    max_exp = find_max_experience(levels, experience)
+
+    with open("career.out", "w") as file_out:
+        file_out.write(str(max_exp))
+
+
+if __name__ == "__main__":
+    main()
