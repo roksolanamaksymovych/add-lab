@@ -2,9 +2,9 @@ def max_wire_length(distance_between_poles, pole_heights):
     number_of_poles = len(pole_heights)
     max_wire_lengths = [0] * number_of_poles
 
-    for current_pole in range(number_of_poles):
+    for current_pole in range(number_of_poles-1):
         max_length = 0
-        for previous_pole in range(current_pole):
+        previous_pole = current_pole -1
             wire_length = ((distance_between_poles ** 2 + (max(pole_heights[current_pole], pole_heights[previous_pole]) - min(pole_heights[current_pole], pole_heights[previous_pole])) ** 2) ** 0.5)
             max_length = max(max_length, max_wire_lengths[previous_pole] + wire_length)
         max_wire_lengths[current_pole] = max_length
